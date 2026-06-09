@@ -1,1 +1,1324 @@
 
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misi Hero Tanggungjawab - Tahun 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f0fdf4; /* Light green playful bg */
+        }
+        h1, h2, h3, .font-kids {
+            font-family: 'Fredoka', sans-serif;
+        }
+        /* Animasi Belon Terapung */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        /* Custom scrollbar untuk kekemasan */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #86efac;
+            border-radius: 10px;
+        }
+
+        /* --- ANIMASI ILUSTRASI KOMUNITI (MISI 3) --- */
+        /* Animasi Baling Sampah (Taman Permainan Betul) */
+        @keyframes toss {
+            0% { transform: translate(-30px, -35px) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translate(15px, 20px) rotate(360deg); opacity: 0; }
+        }
+        .toss-animation {
+            animation: toss 2.5s infinite ease-in-out;
+        }
+
+        /* Animasi Lalat Berdengung (Taman Permainan Salah) */
+        @keyframes buzz {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            30% { transform: translate(-4px, 6px) scale(1.1); }
+            60% { transform: translate(5px, -3px) scale(0.9); }
+        }
+        .buzz-animation {
+            animation: buzz 0.6s infinite ease-in-out;
+        }
+
+        /* Animasi Buku Masuk Rak (Perpustakaan Betul) */
+        @keyframes slideBook {
+            0% { transform: translateY(-40px) rotate(-15deg); opacity: 0; }
+            30% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            70% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-40px) rotate(-15deg); opacity: 0; }
+        }
+        .slide-book {
+            animation: slideBook 3s infinite ease-in-out;
+        }
+
+        /* Animasi Kertas Koyak Hanyut (Perpustakaan Salah) */
+        @keyframes drift {
+            0% { transform: translate(-20px, -20px) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translate(30px, 20px) rotate(180deg); opacity: 0; }
+        }
+        .drift-animation {
+            animation: drift 4s infinite linear;
+        }
+
+        /* Animasi Beratur Berarak (Stesen Bas Betul) */
+        @keyframes march {
+            0% { transform: translateX(-5px); }
+            100% { transform: translateX(5px); }
+        }
+        .march-animation {
+            animation: march 1.5s infinite alternate ease-in-out;
+        }
+
+        /* Animasi Pelanggaran Kasar (Stesen Bas Salah) */
+        @keyframes collide {
+            0%, 100% { transform: scale(1) translate(0, 0); }
+            20% { transform: scale(1.05) translate(-3px, 2px) rotate(2deg); }
+            40% { transform: scale(0.95) translate(3px, -2px) rotate(-2deg); }
+            60% { transform: scale(1.05) translate(-1px, 2px) rotate(1deg); }
+        }
+        .collide-animation {
+            animation: collide 0.6s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden text-slate-800">
+
+    <header class="bg-gradient-to-r from-emerald-400 to-teal-500 text-white shadow-md p-4 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl float-animation">⭐</span>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-wide">Misi Hero Tanggungjawab!</h1>
+                    <p class="text-xs md:text-sm text-emerald-100">Pendidikan Moral Tahun 3</p>
+                </div>
+            </div>
+            <div id="scoreBadge" class="hidden bg-yellow-300 text-yellow-800 px-3 py-1.5 rounded-full font-bold text-sm md:text-base shadow flex items-center gap-1.5">
+                🌟 <span id="currentPoints">0</span> Mata
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6 flex flex-col justify-center">
+        
+        <!-- ================= SKRIN 1: DAFTAR NAMA ================= -->
+        <section id="screenWelcome" class="bg-white rounded-3xl p-6 md:p-10 shadow-xl border-4 border-emerald-300 text-center space-y-6">
+            <div class="relative inline-block">
+                <span class="text-7xl md:text-8xl block float-animation">🧑‍✈️</span>
+                <span class="absolute -top-2 -right-2 text-3xl">✨</span>
+            </div>
+            <h2 class="text-2xl md:text-4xl font-extrabold text-emerald-600">Selamat Datang, Bakal Hero!</h2>
+            <p class="text-base md:text-lg text-slate-600 max-w-md mx-auto">
+                Hai kawan-kawan! Jom bantu <strong>Kapten Amanah</strong> menyelesaikan misi-misi hebat tentang nilai tanggungjawab di rumah, sekolah, dan komuniti!
+            </p>
+            
+            <div class="max-w-xs mx-auto space-y-3">
+                <label for="studentName" class="block text-sm font-bold text-slate-500 uppercase tracking-wider">Masukkan Nama Kamu:</label>
+                <input type="text" id="studentName" placeholder="Contoh: Muhammad / Sarah" 
+                    class="w-full px-4 py-3 border-3 border-slate-300 rounded-2xl text-center font-bold text-lg focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition duration-200">
+                <button onclick="startAdventure()" 
+                    class="w-full bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white font-black text-xl py-4 px-6 rounded-2xl shadow-lg transform active:scale-95 transition duration-150 border-b-4 border-amber-700">
+                    MULA MISI SEKARANG! 🚀
+                </button>
+            </div>
+            <p class="text-xs text-slate-400">Sijil khas menanti kamu di akhir pengembaraan!</p>
+        </section>
+
+        <!-- ================= SKRIN 2: PETA MISI ================= -->
+        <section id="screenMap" class="hidden space-y-6">
+            <div class="bg-white rounded-2xl p-4 shadow-md border-2 border-emerald-100 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-500">Peta Pengembaraan</h3>
+                    <p class="text-xl font-extrabold text-emerald-600">Hero: <span id="displayName" class="underline">Pemain</span> 🧑‍✈️</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-bold text-slate-500">Kemajuan Misi:</span>
+                    <div class="w-32 bg-slate-200 rounded-full h-4 overflow-hidden border border-slate-300">
+                        <div id="missionProgress" class="bg-emerald-400 h-full w-0 transition-all duration-500"></div>
+                    </div>
+                    <span id="missionProgressText" class="text-sm font-black text-emerald-600">0/3</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- KAD MISI 1: ZON RUMAH -->
+                <div id="cardZone1" class="bg-white rounded-3xl p-6 shadow-lg border-4 border-sky-200 hover:border-sky-400 transition-all duration-300 flex flex-col justify-between h-80 text-center relative overflow-hidden">
+                    <div class="absolute top-2 right-2 bg-sky-100 text-sky-600 text-xs font-bold px-2 py-1 rounded-full">Misi 1</div>
+                    <div class="space-y-3">
+                        <span class="text-5xl block">🏠</span>
+                        <h4 class="text-xl font-bold text-sky-700">Zon Rumah</h4>
+                        <p class="text-sm text-slate-500">Bantu Amin mengemas bilik tidurnya yang bersepah!</p>
+                    </div>
+                    <div class="mt-4">
+                        <span id="badgeZone1" class="hidden block bg-emerald-100 text-emerald-700 text-sm font-bold py-1 px-3 rounded-full mb-3">Selesai ✅</span>
+                        <button id="btnZone1" onclick="startZone(1)" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-2.5 px-4 rounded-xl shadow-md transition">
+                            Masuk Zon Rumah 🧹
+                        </button>
+                    </div>
+                </div>
+
+                <!-- KAD MISI 2: ZON SEKOLAH -->
+                <div id="cardZone2" class="bg-white rounded-3xl p-6 shadow-lg border-4 border-indigo-200 hover:border-indigo-400 transition-all duration-300 flex flex-col justify-between h-80 text-center relative overflow-hidden">
+                    <div class="absolute top-2 right-2 bg-indigo-100 text-indigo-600 text-xs font-bold px-2 py-1 rounded-full">Misi 2</div>
+                    <div class="space-y-3">
+                        <span class="text-5xl block">🏫</span>
+                        <h4 class="text-xl font-bold text-indigo-700">Zon Sekolah</h4>
+                        <p class="text-sm text-slate-500">Tingkatkan tanggungjawab dengan mengemas pelbagai sudut bilik darjah secara interaktif!</p>
+                    </div>
+                    <div class="mt-4">
+                        <span id="badgeZone2" class="hidden block bg-emerald-100 text-emerald-700 text-sm font-bold py-1 px-3 rounded-full mb-3">Selesai ✅</span>
+                        <button id="btnZone2" onclick="startZone(2)" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-xl shadow-md transition">
+                            Masuk Zon Sekolah 🏫
+                        </button>
+                    </div>
+                </div>
+
+                <!-- KAD MISI 3: ZON KOMUNITI -->
+                <div id="cardZone3" class="bg-white rounded-3xl p-6 shadow-lg border-4 border-rose-200 hover:border-rose-400 transition-all duration-300 flex flex-col justify-between h-80 text-center relative overflow-hidden">
+                    <div class="absolute top-2 right-2 bg-rose-100 text-rose-600 text-xs font-bold px-2 py-1 rounded-full">Misi 3</div>
+                    <div class="space-y-3">
+                        <span class="text-5xl block">🌳</span>
+                        <h4 class="text-xl font-bold text-rose-700">Zon Komuniti</h4>
+                        <p class="text-sm text-slate-500">Uji pengetahuan kamu dengan membandingkan senario tindakan bertanggungjawab di tempat awam!</p>
+                    </div>
+                    <div class="mt-4">
+                        <span id="badgeZone3" class="hidden block bg-emerald-100 text-emerald-700 text-sm font-bold py-1 px-3 rounded-full mb-3">Selesai ✅</span>
+                        <button id="btnZone3" onclick="startZone(3)" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-2.5 px-4 rounded-xl shadow-md transition">
+                            Masuk Zon Komuniti 🌲
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Butang Sijil Dinamik -->
+            <div id="certificateAlert" class="hidden bg-yellow-100 border-2 border-yellow-400 rounded-2xl p-6 text-center space-y-3">
+                <p class="text-lg font-bold text-yellow-800">🎉 Syabas! Semua misi tanggungjawab telah berjaya diselesaikan! 🎉</p>
+                <button onclick="showCertificate()" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-white font-black py-3 px-8 rounded-2xl shadow-lg hover:scale-105 transition">
+                    TUNTUT SIJIL HERO KAMU! 📜
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= SKRIN 3: ZON 1 (KEMAS RUMAH) ================= -->
+        <section id="screenZone1" class="hidden bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-sky-300 space-y-6">
+            <div class="flex justify-between items-center border-b pb-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-3xl">🏠</span>
+                    <div>
+                        <h3 class="text-xl font-bold text-sky-700">Misi 1: Bilik Tidur Amin</h3>
+                        <p class="text-xs text-slate-500">Bantu Amin meletakkan barang berselerak ke tempat yang betul!</p>
+                    </div>
+                </div>
+                <button onclick="backToMap()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1.5 rounded-lg text-xs font-bold">⬅️ Peta</button>
+            </div>
+
+            <!-- Petunjuk Arahan -->
+            <div class="bg-sky-50 rounded-xl p-3 border border-sky-200 text-center">
+                <p class="text-sm font-medium text-sky-800">
+                    💡 <strong>Cara bermain:</strong> Ketik pada <strong>nama barang</strong>, kemudian ketik pada <strong>tempat menyimpan yang betul</strong>!
+                </p>
+            </div>
+
+            <!-- Kawasan permainan mengisih -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Senarai Barang Berselerak -->
+                <div class="bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-300">
+                    <h4 class="font-bold text-slate-700 text-center mb-3">Barang Berselerak:</h4>
+                    <div id="houseItems" class="grid grid-cols-2 gap-3">
+                        <!-- Dimasukkan secara dinamik oleh JS -->
+                    </div>
+                </div>
+
+                <!-- Sasaran Penyimpanan -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-slate-700 text-center">Tempat Menyimpan:</h4>
+                    
+                    <button onclick="selectContainer('shelf')" id="container_shelf" class="w-full bg-amber-50 hover:bg-amber-100 p-4 rounded-2xl border-2 border-amber-300 flex items-center gap-4 transition text-left focus:ring-4 focus:ring-amber-200">
+                        <span class="text-4xl">📚</span>
+                        <div>
+                            <span class="block font-bold text-amber-900 text-lg">Rak Buku</span>
+                            <span id="shelfCount" class="text-xs text-amber-700 font-semibold">Mengandungi: 0 barang</span>
+                        </div>
+                    </button>
+
+                    <button onclick="selectContainer('box')" id="container_box" class="w-full bg-orange-50 hover:bg-orange-100 p-4 rounded-2xl border-2 border-orange-300 flex items-center gap-4 transition text-left focus:ring-4 focus:ring-orange-200">
+                        <span class="text-4xl">🧸</span>
+                        <div>
+                            <span class="block font-bold text-orange-900 text-lg">Kotak Mainan</span>
+                            <span id="boxCount" class="text-xs text-orange-700 font-semibold">Mengandungi: 0 barang</span>
+                        </div>
+                    </button>
+
+                    <button onclick="selectContainer('bin')" id="container_bin" class="w-full bg-rose-50 hover:bg-rose-100 p-4 rounded-2xl border-2 border-rose-300 flex items-center gap-4 transition text-left focus:ring-4 focus:ring-rose-200">
+                        <span class="text-4xl">🗑️</span>
+                        <div>
+                            <span class="block font-bold text-rose-900 text-lg">Tong Sampah</span>
+                            <span id="binCount" class="text-xs text-rose-700 font-semibold">Mengandungi: 0 barang</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-4 border-t">
+                <div class="text-sm font-bold text-slate-600">
+                    Baki Barang: <span id="remainingItems" class="text-sky-600 font-black text-lg">4</span>
+                </div>
+                <div id="sortingStatus" class="text-sm font-bold text-slate-500 italic">Sila pilih barang di sebelah kiri...</div>
+            </div>
+        </section>
+
+        <!-- ================= SKRIN 4: ZON 2 (SEKOLAH) ================= -->
+        <section id="screenZone2" class="hidden bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-indigo-300 space-y-6">
+            <div class="flex justify-between items-center border-b pb-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-3xl">🏫</span>
+                    <div>
+                        <h3 class="text-xl font-bold text-indigo-700">Misi 2: Ejen Penyelamat Bilik Darjah!</h3>
+                        <p class="text-xs text-slate-500">Ketik terus pada kawasan bilik darjah yang kotor/bersepah di bawah!</p>
+                    </div>
+                </div>
+                <button onclick="backToMap()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1.5 rounded-lg text-xs font-bold">⬅️ Peta</button>
+            </div>
+
+            <!-- Petunjuk Arahan -->
+            <div class="bg-indigo-50 rounded-xl p-3 border border-indigo-200 text-center">
+                <p class="text-sm font-medium text-indigo-900">
+                    💡 <strong>Cara bermain:</strong> Ketik bahagian bilik darjah yang bersepah (<strong>papan putih berconteng, suis menyala, buku terjatuh, sampah di lantai</strong>) untuk mengemasnya!
+                </p>
+            </div>
+
+            <!-- GAMBAR SENARIO INTERAKTIF BILIK DARJAH (SVG & CSS COLOURED GRID VIEWPORT) -->
+            <div class="flex flex-col items-center space-y-4">
+                <div id="classroomSceneContainer" class="relative w-full max-w-2xl aspect-[16/10] bg-gradient-to-b from-sky-100 to-amber-50 rounded-3xl border-4 border-indigo-400 overflow-hidden shadow-2xl select-none">
+                    <!-- Latar Dinding dan Lantai Kelas -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-teal-50 via-teal-50 to-amber-100/30"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-[32%] bg-amber-200/50 border-t-8 border-amber-300/60"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-[28%] bg-slate-300 border-t-4 border-slate-400"></div>
+
+                    <!-- 1. Papan Putih Kelas (task4) -->
+                    <div onclick="cleanTask('task4')" id="scene_task4" class="absolute cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-95" style="top: 8%; left: 15%; width: 70%; height: 32%;">
+                        <div class="w-full h-full bg-white border-4 border-amber-800 rounded-xl shadow-md p-2 flex flex-col justify-between relative overflow-hidden">
+                            <!-- Kotor/Berconteng -->
+                            <div id="whiteboard_dirty" class="absolute inset-0 bg-slate-100/10 flex flex-col items-center justify-center p-2">
+                                <svg class="w-full h-full stroke-slate-500 fill-none stroke-2 opacity-60" viewBox="0 0 100 40">
+                                    <path d="M 10 10 Q 35 25 55 10 T 95 15 M 12 28 Q 45 3 78 30" />
+                                </svg>
+                                <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-rose-500 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-bounce">Padam Coretan! 🧼</span>
+                            </div>
+                            <!-- Bersih -->
+                            <div id="whiteboard_clean" class="hidden absolute inset-0 bg-white flex flex-col items-center justify-center p-2 text-center">
+                                <span class="text-emerald-600 font-extrabold text-xs md:text-base tracking-wide">✨ KELAS 3 AMANAH ✨</span>
+                                <span class="text-[9px] md:text-xs text-slate-500 font-bold mt-1">"Kebersihan Lambang Peribadi Mulia"</span>
+                            </div>
+                            <div class="absolute bottom-1 right-2 w-6 h-2 bg-blue-500 border border-blue-700 rounded shadow-xs"></div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Suis Lampu / Elektrik (task3) -->
+                    <div onclick="cleanTask('task3')" id="scene_task3" class="absolute cursor-pointer transition-all duration-300 hover:scale-110 active:scale-95" style="top: 15%; right: 4%; width: 8%; height: 18%;">
+                        <div class="w-full h-full bg-slate-200 border-2 border-slate-400 rounded-lg p-1 flex flex-col items-center justify-center shadow-md relative">
+                            <!-- ON (Menyala) -->
+                            <div id="switch_dirty" class="flex flex-col items-center justify-center">
+                                <span class="text-xl md:text-3xl animate-pulse">💡</span>
+                                <span class="text-[8px] bg-red-500 text-white font-bold px-1 rounded animate-bounce">ON! ⚡</span>
+                            </div>
+                            <!-- OFF -->
+                            <div id="switch_clean" class="hidden flex flex-col items-center justify-center">
+                                <span class="text-xl md:text-3xl opacity-30">🔌</span>
+                                <span class="text-[8px] text-slate-500 font-bold">OFF ✅</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Rak Buku Bacaan (task2) -->
+                    <div onclick="cleanTask('task2')" id="scene_task2" class="absolute cursor-pointer transition-all duration-300 hover:scale-[1.03] active:scale-95" style="bottom: 12%; left: 8%; width: 22%; height: 38%;">
+                        <div class="w-full h-full bg-amber-700 border-4 border-amber-900 rounded-t-xl p-1 shadow-lg flex flex-col justify-end relative">
+                            <!-- Rak Atas -->
+                            <div class="border-b-4 border-amber-900 w-full h-1/2 flex items-end justify-center pb-0.5 gap-0.5">
+                                <span class="text-base md:text-2xl">📚</span>
+                                <span class="text-base md:text-2xl">📖</span>
+                            </div>
+                            <!-- Rak Bawah -->
+                            <div class="w-full h-1/2 relative flex items-end justify-center pb-0.5">
+                                <!-- Bersepah -->
+                                <div id="books_dirty" class="flex items-end justify-center gap-0.5 w-full h-full">
+                                    <span class="text-base md:text-2xl transform rotate-45 origin-bottom">📘</span>
+                                    <span class="text-base md:text-2xl transform -rotate-12 origin-bottom">📙</span>
+                                    <span class="absolute -bottom-1 -right-6 text-base md:text-2xl transform rotate-90">📕</span>
+                                    <span class="absolute top-1/3 left-1/2 transform -translate-x-1/2 bg-rose-500 text-white text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-md animate-bounce whitespace-nowrap">Susun Buku! 📚</span>
+                                </div>
+                                <!-- Kemas -->
+                                <div id="books_clean" class="hidden flex items-end justify-center gap-0.5">
+                                    <span class="text-base md:text-2xl">📕</span>
+                                    <span class="text-base md:text-2xl">📘</span>
+                                    <span class="text-base md:text-2xl">📙</span>
+                                    <span class="text-[9px] absolute -top-4 left-1/2 transform -translate-x-1/2 bg-emerald-500 text-white px-1.5 rounded-full font-bold whitespace-nowrap">Kemas! ✨</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Lantai Bilik Darjah / Sampah (task1) -->
+                    <div onclick="cleanTask('task1')" id="scene_task1" class="absolute cursor-pointer transition-all duration-300 hover:scale-[1.03] active:scale-95" style="bottom: 8%; right: 15%; width: 45%; height: 22%;">
+                        <div class="w-full h-full relative flex items-center justify-center">
+                            <!-- Kotor -->
+                            <div id="floor_dirty" class="w-full h-full flex items-center justify-around relative">
+                                <span class="text-xl md:text-3xl transform rotate-12">📄</span>
+                                <span class="text-xl md:text-3xl transform -rotate-45">🍂</span>
+                                <span class="text-xl md:text-3xl transform rotate-45">🪰</span>
+                                <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-rose-500 text-white text-[10px] md:text-xs font-bold px-2 py-0.5 rounded-full shadow-lg animate-bounce whitespace-nowrap">Sapu Lantai! 🧹</span>
+                            </div>
+                            <!-- Bersih -->
+                            <div id="floor_clean" class="hidden w-full h-full flex items-center justify-center relative">
+                                <span class="text-2xl md:text-4xl text-yellow-400 animate-pulse">✨ ✨ ✨</span>
+                                <span class="text-[10px] md:text-xs font-black text-emerald-600 bg-emerald-100 px-2.5 py-1 rounded-full absolute shadow-md whitespace-nowrap">Bersih Berkilat! 🧹</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tip Tanggungjawab Dinamik -->
+            <div id="schoolTipBox" class="hidden bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-4 text-center animate-bounce">
+                <p id="schoolTipText" class="text-sm font-bold text-emerald-800">Hebat!</p>
+            </div>
+
+            <div class="flex justify-between items-center pt-4 border-t">
+                <div class="text-sm font-bold text-slate-600">
+                    Kemajuan Pembersihan: <span id="cleanedTasksCount" class="text-indigo-600 font-black text-lg">0</span>/4 Selesai
+                </div>
+                <div class="w-32 bg-slate-200 rounded-full h-3 overflow-hidden border border-slate-300">
+                    <div id="schoolGameProgress" class="bg-indigo-500 h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SKRIN 5: ZON 3 (KOMUNITI) ================= -->
+        <section id="screenZone3" class="hidden bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-rose-300 space-y-6">
+            <div class="flex justify-between items-center border-b pb-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-3xl">🌳</span>
+                    <div>
+                        <h3 class="text-xl font-bold text-rose-700">Misi 3: Bandingan Senario Komuniti</h3>
+                        <p class="text-xs text-slate-500">Ketik pada gambar/kad yang menunjukkan tindakan yang BETUL dan BERTANGGUNGJAWAB dalam komuniti!</p>
+                    </div>
+                </div>
+                <button onclick="backToMap()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1.5 rounded-lg text-xs font-bold">⬅️ Peta</button>
+            </div>
+
+            <!-- Kad Soalan Dinamik -->
+            <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-4 text-center">
+                <span class="bg-rose-200 text-rose-800 text-xs font-black px-3 py-1 rounded-full uppercase">Situasi <span id="quizIndex">1</span>/3</span>
+                <h4 id="quizQuestion" class="text-base md:text-lg font-bold text-slate-800 mt-2">Soalan situasi akan muncul di sini...</h4>
+            </div>
+
+            <!-- Dua Kad Gambar Bandingan Side-by-Side / Stacked on Mobile -->
+            <div id="scenarioComparisonContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Dimasukkan secara dinamik oleh JS -->
+            </div>
+
+            <!-- Maklum Balas Kuiz -->
+            <div id="quizFeedback" class="hidden p-4 rounded-xl text-center font-bold">
+                Maklum balas
+            </div>
+
+            <div class="flex justify-between items-center pt-4 border-t">
+                <div class="h-2 bg-slate-200 rounded-full w-24 overflow-hidden">
+                    <div id="quizProgress" class="bg-rose-500 h-full w-0 transition-all"></div>
+                </div>
+                <button id="btnNextQuiz" onclick="nextQuiz()" class="hidden bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 px-6 rounded-xl transition">
+                    Seterusnya ➡️
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= SKRIN 6: SIJIL HERO ================= -->
+        <section id="screenCertificate" class="hidden space-y-6">
+            <!-- Sijil Fizikal Digital -->
+            <div class="bg-white border-12 border-double border-yellow-500 rounded-3xl p-6 md:p-12 shadow-2xl relative text-center space-y-6 overflow-hidden">
+                <!-- Hiasan Sijil -->
+                <div class="absolute -top-8 -left-8 text-7xl opacity-20">📜</div>
+                <div class="absolute -bottom-8 -right-8 text-7xl opacity-20">✨</div>
+                
+                <span class="text-5xl block">🏆</span>
+                <h2 class="text-3xl md:text-5xl font-black text-amber-600 uppercase tracking-widest">Sijil Penghargaan</h2>
+                <p class="text-slate-500 text-sm tracking-wider uppercase">Dengan ini dianugerahkan kepada:</p>
+                
+                <h3 id="certName" class="text-2xl md:text-4xl font-extrabold text-emerald-600 border-b-2 border-dashed border-emerald-300 inline-block px-8 py-2">HERO CEMERLANG</h3>
+                
+                <p class="text-slate-600 max-w-lg mx-auto text-base md:text-lg">
+                    Kerana telah berjaya menunjukkan pemahaman yang tinggi serta menyelesaikan semua misi simulasi dengan cemerlang tentang <strong>Nilai Tanggungjawab (Moral Tahun 3)</strong>.
+                </p>
+
+                <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto pt-6 border-t border-slate-200 text-left">
+                    <div>
+                        <span class="block text-xs text-slate-400 font-bold uppercase">Gelaran Hero:</span>
+                        <span class="font-bold text-yellow-600 text-sm">Hero Tanggungjawab Cilik 🎖️</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-xs text-slate-400 font-bold uppercase">Tarikh Pencapaian:</span>
+                        <span id="certDate" class="font-bold text-slate-600 text-sm">--/--/----</span>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-center gap-2">
+                    <span class="text-4xl">🌟</span>
+                    <span class="text-4xl">🧑‍✈️</span>
+                    <span class="text-4xl">🌟</span>
+                </div>
+            </div>
+
+            <!-- Butang Sijil -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="downloadCertificate()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-2xl shadow-md flex items-center justify-center gap-2 transition">
+                    💾 Muat Turun Sijil (PNG)
+                </button>
+                <button onclick="restartGame()" class="bg-slate-500 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-2xl shadow-md flex items-center justify-center gap-2 transition">
+                    🔄 Main Semula
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 text-xs py-4 text-center border-t border-slate-700">
+        <div class="max-w-4xl mx-auto px-4">
+            <p>© 2026 Misi Hero Tanggungjawab. Dibangunkan khas untuk Pembelajaran Pendidikan Moral Tahun 3.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- SOUND EFFECTS ENGINE (Web Audio API) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+            } else if (type === 'correct') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.2); // G5
+                osc.frequency.setValueAtTime(1046.50, audioCtx.currentTime + 0.3); // C6
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.5);
+            } else if (type === 'incorrect') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(220, audioCtx.currentTime); // A3
+                osc.frequency.linearRampToValueAtTime(110, audioCtx.currentTime + 0.3); // A2
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            } else if (type === 'complete') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.15);
+                osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.3);
+                osc.frequency.setValueAtTime(1046.50, audioCtx.currentTime + 0.45);
+                gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.8);
+            }
+        }
+
+        // --- STATE APLIKASI ---
+        let state = {
+            studentName: "",
+            score: 0,
+            completedZones: [], 
+            currentZone: null,
+            
+            zone1: {
+                selectedItem: null,
+                items: [
+                    { id: 'item1', name: '🧸 Patung Beruang', type: 'box', container: null },
+                    { id: 'item2', name: '📚 Buku Moral T3', type: 'shelf', container: null },
+                    { id: 'item3', name: '🗑️ Kulit Pisang', type: 'bin', container: null },
+                    { id: 'item4', name: '📚 Majalah Kanak-kanak', type: 'shelf', container: null },
+                    { id: 'item5', name: '🧸 Kereta Mainan', type: 'box', container: null },
+                    { id: 'item6', name: '🗑️ Botol Kosong', type: 'bin', container: null }
+                ]
+            },
+
+            zone2: {
+                tasks: [
+                    { 
+                        id: 'task1', 
+                        name: '🗑️ Lantai Bilik Darjah', 
+                        problem: 'Sisa pemadam & kertas bertaburan di lantai kelas.', 
+                        action: 'Sapu & Kutip Sampah! 🧹', 
+                        cleanText: 'Lantai kelas kini berseri, bersih dan kemas!', 
+                        tip: 'Tanggungjawab menjaga kebersihan kelas membolehkan kita belajar dalam keadaan selesa dan tenang.', 
+                        completed: false 
+                    },
+                    { 
+                        id: 'task2', 
+                        name: '📚 Rak Buku Bacaan', 
+                        problem: 'Buku rujukan bertabur dan terjatuh di sudut bacaan.', 
+                        action: 'Susun Buku di Rak! 📚', 
+                        cleanText: 'Semua buku tersusun rapi mengikut kategori!', 
+                        tip: 'Menyusun buku selepas dibaca memudahkan rakan-rakan lain mencari dan menggunakannya semula.', 
+                        completed: false 
+                    },
+                    { 
+                        id: 'task3', 
+                        name: '💡 Suis Elektrik Kelas', 
+                        problem: 'Lampu dan kipas terbiar berpusing semasa waktu rehat.', 
+                        action: 'Tutup Suis Utama! ⚡', 
+                        cleanText: 'Tenaga elektrik berjaya dijimatkan dengan bijak!', 
+                        tip: 'Sikap bertanggungjawab menutup elektrik dapat mengelakkan pembaziran tenaga dan mengurangkan kos bil sekolah.', 
+                        completed: false 
+                    },
+                    { 
+                        id: 'task4', 
+                        name: '🧼 Papan Putih Kelas', 
+                        problem: 'Papan putih penuh dengan coretan yang tidak dipadam.', 
+                        action: 'Padam Papan Putih! 🧼', 
+                        cleanText: 'Papan putih bersih dan sedia untuk subjek seterusnya!', 
+                        tip: 'Memastikan kelengkapan kelas bersih selepas digunakan menunjukkan kita menghormati guru dan rakan sekelas.', 
+                        completed: false 
+                    }
+                ]
+            },
+
+            zone3: {
+                currentQuestion: 0,
+                quiz: [
+                    {
+                        question: "Apakah tindakan tanggungjawab kamu semasa berada di taman permainan komuniti?",
+                        scenarios: [
+                            {
+                                id: 's1_a',
+                                text: "Membuang sisa bungkusan makanan dan botol minuman kosong ke dalam tong sampah awam yang disediakan.",
+                                isCorrect: true,
+                                color: "from-emerald-50 to-teal-50 border-emerald-200 hover:border-emerald-400 text-emerald-900",
+                                badge: "Tanggungjawab ✅",
+                                feedback: "Syabas! Menjaga kebersihan taman permainan komuniti memastikan kawasan rekreasi sentiasa bersih, selesa dan selamat untuk semua.",
+                                illustrationHTML: `
+                                    <div class="relative w-full h-full flex items-center justify-center bg-gradient-to-b from-emerald-50 to-green-100 overflow-hidden">
+                                        <!-- Hiasan Langit, Awan & Matahari -->
+                                        <div class="absolute top-2 left-4 text-xs">☁️</div>
+                                        <div class="absolute top-1 right-4 text-sm animate-pulse">☀️</div>
+                                        <!-- Padang & Pokok -->
+                                        <div class="absolute bottom-0 inset-x-0 h-8 bg-green-500/20 flex items-end justify-between px-3 text-xs">
+                                            <span>🌱</span><span>🌳</span><span>🌱</span>
+                                        </div>
+                                        <!-- Animasi Baling Sampah -->
+                                        <div class="absolute toss-animation text-2xl z-20" style="left: 30%; top: 15%;">📄</div>
+                                        <!-- Tong Sampah -->
+                                        <div class="text-4xl z-10 relative mt-3">🗑️</div>
+                                        <!-- Efek Kilauan -->
+                                        <div class="absolute text-yellow-400 text-xs animate-ping top-1/2 left-1/3">✨</div>
+                                        <div class="absolute text-yellow-400 text-xs animate-ping bottom-1/3 right-1/4" style="animation-delay: 0.5s;">✨</div>
+                                    </div>
+                                `
+                            },
+                            {
+                                id: 's1_b',
+                                text: "Membiarkan pembalut plastik ais krim dan bekas makanan berserak di atas padang rumput selepas selesai bermain.",
+                                isCorrect: false,
+                                color: "from-rose-50 to-red-50 border-rose-200 hover:border-rose-400 text-rose-900",
+                                badge: "Tidak Bertanggungjawab ❌",
+                                feedback: "Kurang tepat. Sikap membuang sampah merata-rata boleh merosakkan keindahan alam sekitar, mengundang haiwan perosak dan menyebarkan penyakit.",
+                                illustrationHTML: `
+                                    <div class="relative w-full h-full flex items-center justify-center bg-gradient-to-b from-orange-50 to-yellow-100 overflow-hidden">
+                                        <!-- Langit Mendung -->
+                                        <div class="absolute top-1 right-4 text-xs opacity-50">☁️</div>
+                                        <!-- Padang Layu -->
+                                        <div class="absolute bottom-0 inset-x-0 h-8 bg-amber-600/15 flex items-end justify-around px-3 text-xs">
+                                            <span>🥀</span><span>🍂</span><span>🥀</span>
+                                        </div>
+                                        <!-- Sampah Berserak -->
+                                        <div class="absolute bottom-3 left-6 text-xl">📄</div>
+                                        <div class="absolute bottom-2 right-12 text-xl">🥤</div>
+                                        <div class="absolute bottom-4 right-4 text-xl">🍌</div>
+                                        <!-- Animasi Lalat Berdengung -->
+                                        <div class="absolute buzz-animation text-lg" style="top: 25%; left: 30%;">🪰</div>
+                                        <div class="absolute buzz-animation text-lg" style="top: 15%; right: 25%; animation-delay: 0.3s;">🪰</div>
+                                    </div>
+                                `
+                            }
+                        ]
+                    },
+                    {
+                        question: "Bagaimanakah cara yang betul untuk menggunakan buku di perpustakaan awam komuniti?",
+                        scenarios: [
+                            {
+                                id: 's2_a',
+                                text: "Membaca dengan senyap agar tidak mengganggu orang lain dan menyusun semula buku ke rak asalnya selepas dibaca.",
+                                isCorrect: true,
+                                color: "from-emerald-50 to-teal-50 border-emerald-200 hover:border-emerald-400 text-emerald-900",
+                                badge: "Tanggungjawab ✅",
+                                feedback: "Hebat! Menjaga adab dan menyusun semula buku menunjukkan rasa hormat kepada pengguna lain dan mengekalkan kekemasan kemudahan awam.",
+                                illustrationHTML: `
+                                    <div class="relative w-full h-full flex items-center justify-center bg-gradient-to-b from-teal-50 to-emerald-50 overflow-hidden">
+                                        <!-- Rak Buku Teratur -->
+                                        <div class="w-20 h-16 border-2 border-amber-800 bg-amber-700/15 rounded-lg flex items-end justify-center p-1 relative mt-2">
+                                            <span class="text-2xl">📕</span>
+                                            <span class="text-2xl">📘</span>
+                                            <!-- Buku Masuk Rak Sendiri -->
+                                            <span class="text-2xl slide-book absolute" style="left: 55%;">📙</span>
+                                        </div>
+                                        <!-- Kilauan & Pengisyarat Senyap -->
+                                        <div class="absolute top-2 right-6 text-yellow-500 animate-pulse text-xs">✨</div>
+                                        <div class="absolute top-2 left-4 text-emerald-700 font-bold text-[10px] bg-white/80 px-1.5 py-0.5 rounded-full shadow-xs">🤫 Shh!</div>
+                                    </div>
+                                `
+                            },
+                            {
+                                id: 's2_b',
+                                text: "Meninggalkan buku cerita bersepah di atas meja serta sengaja melipat atau mengoyakkan helaian mukasurat buku.",
+                                isCorrect: false,
+                                color: "from-rose-50 to-red-50 border-rose-200 hover:border-rose-400 text-rose-900",
+                                badge: "Tidak Bertanggungjawab ❌",
+                                feedback: "Kurang tepat. Merosakkan atau membiarkan buku bersepah menyusahkan orang lain dan menunjukkan sikap tidak menghargai harta benda awam.",
+                                illustrationHTML: `
+                                    <div class="relative w-full h-full flex items-center justify-center bg-gradient-to-b from-red-50 to-orange-50 overflow-hidden">
+                                        <!-- Rak Berterabur -->
+                                        <div class="w-20 h-16 border-2 border-amber-950 bg-amber-900/10 rounded-lg flex items-end justify-center p-1 relative mt-2">
+                                            <span class="text-2xl transform rotate-45 origin-bottom">📘</span>
+                                            <!-- Buku Jatuh Terkeluar -->
+                                            <span class="text-2xl absolute -bottom-3 right-[-5px] transform rotate-90 animate-bounce">📕</span>
+                                        </div>
+                                        <!-- Animasi Kertas Koyak Hanyut -->
+                                        <div class="absolute drift-animation text-md" style="top: 15%; left: 15%;">📄</div>
+                                        <div class="absolute drift-animation text-xs" style="top: 30%; right: 20%; animation-delay: 0.5s;">📄</div>
+                                        <div class="absolute top-2 right-4 text-xs">💥</div>
+                                    </div>
+                                `
+                            }
+                        ]
+                    },
+                    {
+                        question: "Apakah tindakan tanggungjawab ketika ingin menaiki bas awam di stesen bas komuniti?",
+                        scenarios: [
+                            {
+                                id: 's3_a',
+                                text: "Beratur dengan tertib mengikut barisan dan memberi laluan kepada golongan warga emas atau ibu mengandung terlebih dahulu.",
+                                isCorrect: true,
+                                color: "from-emerald-50 to-teal-50 border-emerald-200 hover:border-emerald-400 text-emerald-900",
+                                badge: "Tanggungjawab ✅",
+                                feedback: "Cemerlang! Beratur dengan sabar dan bertolak ansur membina suasana komuniti yang harmoni serta menjamin keselamatan semua orang.",
+                                illustrationHTML: `
+                                    <div class="relative w-full h-full flex items-center justify-center bg-gradient-to-b from-sky-50 to-blue-100 overflow-hidden">
+                                        <!-- Hiasan Stesen Bas -->
+                                        <div class="absolute left-2 top-2 text-md">🚏</div>
+                                        <div class="absolute right-3 top-3 text-3xl animate-pulse">🚌</div>
+                                        <!-- Barisan Marching yang teratur -->
+                                        <div class="absolute bottom-1.5 left-5 flex items-center gap-1 march-animation">
+                                            <span class="text-xl">👵</span>
+                                            <span class="text-xl">🧑‍✈️</span>
+                                            <span class="text-xl">👧</span>
+                                        </div>
+                                        <!-- Simbol Kasih Sayang -->
+                                        <div class="absolute top-1.5 right-12 text-emerald-500 text-sm animate-bounce">💖</div>
+                                    </div>
+                                `
+                            },
+                            {
+                                id: 's3_b',
+                                text: "Berebut-rebut, berlari dan tolak-menolak di pintu bas awam untuk masuk dahulu tanpa mempedulikan barisan.",
+                                isCorrect: false,
+                                color: "from-rose-50 to-red-50 border-rose-200 hover:border-rose-400 text-rose-900",
+                                badge: "Tidak Bertanggungjawab ❌",
+                                feedback: "Kurang tepat. Sikap berebut-rebut amat berbahaya kerana boleh mendatangkan kecederaan fizikal dan mencerminkan akhlak yang kurang sopan.",
+                                illustrationHTML: `
+                                    <div class="relative w-full h-full flex items-center justify-center bg-gradient-to-b from-rose-50 to-red-100 overflow-hidden">
+                                        <div class="absolute left-2 top-2 text-md">🚏</div>
+                                        <div class="absolute right-3 top-3 text-3xl">🚌</div>
+                                        <!-- Animasi Tolak-Menolak Kasar -->
+                                        <div class="absolute bottom-1.5 left-6 flex items-center gap-[-8px] collide-animation">
+                                            <span class="text-xl transform translate-x-1">🏃‍♂️</span>
+                                            <span class="text-xl transform -translate-x-1">🏃‍♀️</span>
+                                            <span class="text-md">💥</span>
+                                        </div>
+                                        <!-- Debu Berterbangan -->
+                                        <div class="absolute top-1 right-12 text-xs animate-ping">💨</div>
+                                    </div>
+                                `
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // --- NAVIGASI SKRIN ---
+        function showScreen(screenId) {
+            playSound('click');
+            document.getElementById('screenWelcome').classList.add('hidden');
+            document.getElementById('screenMap').classList.add('hidden');
+            document.getElementById('screenZone1').classList.add('hidden');
+            document.getElementById('screenZone2').classList.add('hidden');
+            document.getElementById('screenZone3').classList.add('hidden');
+            document.getElementById('screenCertificate').classList.add('hidden');
+
+            document.getElementById(screenId).classList.remove('hidden');
+
+            const scoreBadge = document.getElementById('scoreBadge');
+            if (screenId !== 'screenWelcome' && screenId !== 'screenCertificate') {
+                scoreBadge.classList.remove('hidden');
+            } else {
+                scoreBadge.classList.add('hidden');
+            }
+        }
+
+        // --- MULAKAN PENGEMBARAAN ---
+        function startAdventure() {
+            const nameInput = document.getElementById('studentName').value.trim();
+            if (nameInput === "") {
+                alert("Sila masukkan nama kamu dahulu untuk menjadi Hero! 😊");
+                return;
+            }
+            state.studentName = nameInput;
+            document.getElementById('displayName').innerText = nameInput;
+            document.getElementById('certName').innerText = nameInput.toUpperCase();
+            
+            const hariIni = new Date();
+            const tarikhFormat = hariIni.getDate() + '/' + (hariIni.getMonth() + 1) + '/' + hariIni.getFullYear();
+            document.getElementById('certDate').innerText = tarikhFormat;
+
+            showScreen('screenMap');
+            updateMapUI();
+        }
+
+        // --- KEMBALI KE PETA ---
+        function backToMap() {
+            showScreen('screenMap');
+            updateMapUI();
+        }
+
+        // --- KEMAS KINI STATUS PETA ---
+        function updateMapUI() {
+            document.getElementById('currentPoints').innerText = state.score;
+
+            const completedCount = state.completedZones.length;
+            const progressPercentage = (completedCount / 3) * 100;
+            document.getElementById('missionProgress').style.width = `${progressPercentage}%`;
+            document.getElementById('missionProgressText').innerText = `${completedCount}/3`;
+
+            if (state.completedZones.includes(1)) {
+                document.getElementById('badgeZone1').classList.remove('hidden');
+                document.getElementById('btnZone1').innerText = "Main Semula 🔄";
+                document.getElementById('btnZone1').classList.replace('bg-sky-500', 'bg-slate-400');
+                document.getElementById('cardZone1').classList.add('opacity-90');
+            }
+            if (state.completedZones.includes(2)) {
+                document.getElementById('badgeZone2').classList.remove('hidden');
+                document.getElementById('btnZone2').innerText = "Main Semula 🔄";
+                document.getElementById('btnZone2').classList.replace('bg-indigo-500', 'bg-slate-400');
+                document.getElementById('cardZone2').classList.add('opacity-90');
+            }
+            if (state.completedZones.includes(3)) {
+                document.getElementById('badgeZone3').classList.remove('hidden');
+                document.getElementById('btnZone3').innerText = "Main Semula 🔄";
+                document.getElementById('btnZone3').classList.replace('bg-rose-500', 'bg-slate-400');
+                document.getElementById('cardZone3').classList.add('opacity-90');
+            }
+
+            if (completedCount === 3) {
+                document.getElementById('certificateAlert').classList.remove('hidden');
+            } else {
+                document.getElementById('certificateAlert').classList.add('hidden');
+            }
+        }
+
+        // --- MASUK ZON AKTIVITI ---
+        function startZone(zoneNum) {
+            state.currentZone = zoneNum;
+            if (zoneNum === 1) {
+                initZone1();
+                showScreen('screenZone1');
+            } else if (zoneNum === 2) {
+                initZone2();
+                showScreen('screenZone2');
+            } else if (zoneNum === 3) {
+                initZone3();
+                showScreen('screenZone3');
+            }
+        }
+
+        // ================= LOGIK ZON 1: KEMAS RUMAH =================
+        function initZone1() {
+            state.zone1.items.forEach(item => item.container = null);
+            state.zone1.selectedItem = null;
+            updateZone1UI();
+        }
+
+        function updateZone1UI() {
+            const itemsContainer = document.getElementById('houseItems');
+            itemsContainer.innerHTML = '';
+
+            const pendingItems = state.zone1.items.filter(item => item.container === null);
+            document.getElementById('remainingItems').innerText = pendingItems.length;
+
+            if (pendingItems.length === 0) {
+                playSound('complete');
+                if (!state.completedZones.includes(1)) {
+                    state.completedZones.push(1);
+                    state.score += 30; 
+                }
+                document.getElementById('sortingStatus').innerHTML = "<span class='text-emerald-600 font-extrabold'>🎉 Hebat! Bilik Amin telah kemas dan bersih! (Bonus +30 Mata!)</span>";
+                
+                setTimeout(() => {
+                    backToMap();
+                }, 2000);
+                return;
+            }
+
+            pendingItems.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = `p-3 rounded-xl border-2 font-bold text-sm md:text-base flex items-center justify-center gap-1.5 transition transform active:scale-95 ${
+                    state.zone1.selectedItem && state.zone1.selectedItem.id === item.id 
+                    ? 'bg-yellow-100 border-yellow-500 scale-105 shadow-md text-yellow-800' 
+                    : 'bg-white border-slate-200 hover:border-sky-300 text-slate-700'
+                }`;
+                btn.innerHTML = item.name;
+                btn.onclick = () => selectItem(item);
+                itemsContainer.appendChild(btn);
+            });
+
+            document.getElementById('shelfCount').innerText = "Mengandungi: " + state.zone1.items.filter(i => i.container === 'shelf').length + " barang";
+            document.getElementById('boxCount').innerText = "Mengandungi: " + state.zone1.items.filter(i => i.container === 'box').length + " barang";
+            document.getElementById('binCount').innerText = "Mengandungi: " + state.zone1.items.filter(i => i.container === 'bin').length + " barang";
+        }
+
+        function selectItem(item) {
+            playSound('click');
+            state.zone1.selectedItem = item;
+            document.getElementById('sortingStatus').innerHTML = `Memilih <span class='text-sky-600 font-black'>${item.name}</span>. Sekarang pilih tempat menyimpannya!`;
+            updateZone1UI();
+        }
+
+        function selectContainer(containerType) {
+            if (!state.zone1.selectedItem) {
+                playSound('incorrect');
+                document.getElementById('sortingStatus').innerHTML = "<span class='text-rose-500 font-bold'>⚠️ Pilih satu barang di sebelah kiri terlebih dahulu!</span>";
+                return;
+            }
+
+            const item = state.zone1.selectedItem;
+            if (item.type === containerType) {
+                playSound('correct');
+                item.container = containerType;
+                state.score += 10;
+                document.getElementById('currentPoints').innerText = state.score;
+                document.getElementById('sortingStatus').innerHTML = `<span class='text-emerald-500 font-bold'>✅ Bagus! ${item.name} disimpan ke tempat yang betul! (+10 Mata)</span>`;
+            } else {
+                playSound('incorrect');
+                document.getElementById('sortingStatus').innerHTML = `<span class='text-rose-500 font-bold'>❌ Alamak! Bukan di situ tempatnya. Cuba lagi!</span>`;
+            }
+
+            state.zone1.selectedItem = null;
+            updateZone1UI();
+        }
+
+        // ================= LOGIK ZON 2: SEKOLAH =================
+        function initZone2() {
+            state.zone2.tasks.forEach(t => t.completed = false);
+            
+            const tipBox = document.getElementById('schoolTipBox');
+            tipBox.className = "hidden bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-4 text-center animate-bounce";
+            tipBox.innerHTML = '<p id="schoolTipText" class="text-sm font-bold text-emerald-800">Hebat!</p>';
+            
+            updateZone2UI();
+        }
+
+        function updateZone2UI() {
+            const completedTasks = state.zone2.tasks.filter(t => t.completed).length;
+            document.getElementById('cleanedTasksCount').innerText = completedTasks;
+            
+            const percentage = (completedTasks / state.zone2.tasks.length) * 100;
+            document.getElementById('schoolGameProgress').style.width = `${percentage}%`;
+
+            state.zone2.tasks.forEach(task => {
+                const isCompleted = task.completed;
+                const element = document.getElementById(`scene_${task.id}`);
+                
+                if (task.id === 'task4') { 
+                    document.getElementById('whiteboard_dirty').style.display = isCompleted ? 'none' : 'flex';
+                    document.getElementById('whiteboard_clean').style.display = isCompleted ? 'flex' : 'none';
+                } else if (task.id === 'task3') { 
+                    document.getElementById('switch_dirty').style.display = isCompleted ? 'none' : 'flex';
+                    document.getElementById('switch_clean').style.display = isCompleted ? 'flex' : 'none';
+                } else if (task.id === 'task2') { 
+                    document.getElementById('books_dirty').style.display = isCompleted ? 'none' : 'flex';
+                    document.getElementById('books_clean').style.display = isCompleted ? 'flex' : 'none';
+                } else if (task.id === 'task1') { 
+                    document.getElementById('floor_dirty').style.display = isCompleted ? 'none' : 'flex';
+                    document.getElementById('floor_clean').style.display = isCompleted ? 'flex' : 'none';
+                }
+
+                if (isCompleted) {
+                    element.style.pointerEvents = 'none';
+                    element.classList.remove('cursor-pointer');
+                    element.classList.add('opacity-100');
+                } else {
+                    element.style.pointerEvents = 'auto';
+                    element.classList.add('cursor-pointer');
+                }
+            });
+
+            if (completedTasks === state.zone2.tasks.length) {
+                playSound('complete');
+                
+                if (!state.completedZones.includes(2)) {
+                    state.completedZones.push(2);
+                    state.score += 30; 
+                }
+
+                const tipBox = document.getElementById('schoolTipBox');
+                tipBox.className = "p-6 rounded-3xl text-center bg-indigo-100 border-2 border-indigo-400 text-indigo-900 font-bold space-y-2 mt-4 block animate-none";
+                tipBox.innerHTML = `
+                    <span class="text-5xl block animate-bounce">🏆</span>
+                    <h4 class="text-xl font-black text-indigo-800">Misi Sekolah Selesai Dengan Cemerlang!</h4>
+                    <p class="text-sm">Syabas, murid budiman! Kamu telah menyelamatkan bilik darjah kita. Nilai tanggungjawab ini patut dipraktikkan setiap hari! (+30 Mata Bonus!)</p>
+                `;
+                tipBox.classList.remove('hidden');
+
+                setTimeout(() => {
+                    backToMap();
+                }, 4000);
+            }
+        }
+
+        function cleanTask(taskId) {
+            const task = state.zone2.tasks.find(t => t.id === taskId);
+            if (task && !task.completed) {
+                playSound('correct');
+                task.completed = true;
+                state.score += 15; 
+                document.getElementById('currentPoints').innerText = state.score;
+
+                const tipBox = document.getElementById('schoolTipBox');
+                const tipText = document.getElementById('schoolTipText');
+                
+                tipText.innerHTML = `🌟 <strong>Bagus!</strong> ${task.cleanText}<br><span class="text-xs font-normal">${task.tip}</span>`;
+                tipBox.classList.remove('hidden');
+
+                updateZone2UI();
+            }
+        }
+
+        // ================= LOGIK ZON 3: KOMUNITI (ANIMATED) =================
+        function initZone3() {
+            state.zone3.currentQuestion = 0;
+            document.getElementById('btnNextQuiz').classList.add('hidden');
+            document.getElementById('quizFeedback').classList.add('hidden');
+            loadQuiz();
+        }
+
+        function loadQuiz() {
+            const currentIdx = state.zone3.currentQuestion;
+            const quizItem = state.zone3.quiz[currentIdx];
+
+            document.getElementById('quizIndex').innerText = currentIdx + 1;
+            document.getElementById('quizQuestion').innerText = quizItem.question;
+
+            const progress = ((currentIdx) / state.zone3.quiz.length) * 100;
+            document.getElementById('quizProgress').style.width = `${progress}%`;
+
+            const container = document.getElementById('scenarioComparisonContainer');
+            container.innerHTML = '';
+            document.getElementById('quizFeedback').classList.add('hidden');
+            document.getElementById('btnNextQuiz').classList.add('hidden');
+
+            const shuffledScenarios = [...quizItem.scenarios].sort(() => Math.random() - 0.5);
+
+            shuffledScenarios.forEach((scenario, idx) => {
+                const card = document.createElement('div');
+                card.id = `scenario_card_${idx}`;
+                card.className = `cursor-pointer rounded-3xl border-4 p-5 flex flex-col justify-between items-center text-center transition-all duration-300 transform hover:scale-[1.03] active:scale-95 bg-gradient-to-b ${scenario.color} shadow-lg h-[22rem] md:h-96 relative overflow-hidden`;
+                
+                card.innerHTML = `
+                    <!-- Ilustrasi Senario Komuniti Beranimasi (Digantikan dari Emoji statik) -->
+                    <div class="w-full h-36 md:h-44 rounded-2xl border-2 border-slate-200 flex flex-col items-center justify-center relative overflow-hidden shadow-inner bg-white">
+                        ${scenario.illustrationHTML}
+                        <span class="absolute top-2 right-2 text-[10px] bg-slate-900/60 text-white font-bold px-2 py-0.5 rounded-full z-30">Senario ${idx + 1}</span>
+                    </div>
+
+                    <!-- Teks Huraian Senario -->
+                    <div class="mt-4 flex-grow flex flex-col justify-center">
+                        <p class="text-xs md:text-sm font-extrabold text-slate-800 leading-snug">${scenario.text}</p>
+                    </div>
+
+                    <!-- Lencana Bawah (Ditunjukkan selepas klik) -->
+                    <div id="badge_${idx}" class="hidden mt-3 text-[10px] md:text-xs font-black uppercase px-4 py-1.5 rounded-full shadow-sm z-20">
+                        ${scenario.badge}
+                    </div>
+                `;
+
+                card.onclick = () => selectScenario(idx, scenario, shuffledScenarios);
+                container.appendChild(card);
+            });
+        }
+
+        function selectScenario(selectedIdx, scenario, allScenarios) {
+            const container = document.getElementById('scenarioComparisonContainer');
+            const cards = container.children;
+            for (let i = 0; i < cards.length; i++) {
+                cards[i].style.pointerEvents = 'none';
+                
+                const badge = document.getElementById(`badge_${i}`);
+                badge.classList.remove('hidden');
+                
+                const currentScenario = allScenarios[i];
+                if (currentScenario.isCorrect) {
+                    badge.className = "mt-3 text-[10px] md:text-xs font-black uppercase px-4 py-1.5 rounded-full shadow-sm bg-emerald-100 text-emerald-800 border border-emerald-300 z-20";
+                    cards[i].classList.add('ring-4', 'ring-emerald-400', 'border-emerald-500');
+                } else {
+                    badge.className = "mt-3 text-[10px] md:text-xs font-black uppercase px-4 py-1.5 rounded-full shadow-sm bg-rose-100 text-rose-800 border border-rose-300 z-20";
+                    cards[i].classList.add('opacity-75', 'border-rose-400');
+                }
+            }
+
+            const feedbackBox = document.getElementById('quizFeedback');
+            feedbackBox.classList.remove('hidden');
+
+            if (scenario.isCorrect) {
+                playSound('correct');
+                state.score += 15;
+                document.getElementById('currentPoints').innerText = state.score;
+                feedbackBox.className = "p-4 rounded-xl text-center text-xs md:text-sm font-bold bg-emerald-100 text-emerald-800 border-2 border-emerald-300";
+                feedbackBox.innerHTML = `🌟 <strong>Betul!</strong> ${scenario.feedback}`;
+            } else {
+                playSound('incorrect');
+                feedbackBox.className = "p-4 rounded-xl text-center text-xs md:text-sm font-bold bg-rose-100 text-rose-800 border-2 border-rose-300";
+                feedbackBox.innerHTML = `⚠️ <strong>Kurang Tepat!</strong> ${scenario.feedback}`;
+            }
+
+            document.getElementById('btnNextQuiz').classList.remove('hidden');
+        }
+
+        function nextQuiz() {
+            playSound('click');
+            state.zone3.currentQuestion++;
+
+            if (state.zone3.currentQuestion >= state.zone3.quiz.length) {
+                playSound('complete');
+                if (!state.completedZones.includes(3)) {
+                    state.completedZones.push(3);
+                    state.score += 30; 
+                }
+                
+                document.getElementById('quizProgress').style.width = '100%';
+
+                const container = document.getElementById('scenarioComparisonContainer');
+                container.innerHTML = `
+                    <div class="col-span-full text-center p-6 bg-emerald-100 rounded-2xl text-emerald-800 border-2 border-emerald-300 space-y-3 shadow-lg">
+                        <span class="text-5xl block animate-bounce">🏆</span>
+                        <h4 class="text-xl font-black text-emerald-900">Zon Bandingan Komuniti Selesai!</h4>
+                        <p class="text-sm">Syabas! Kamu berjaya membezakan tingkah laku yang bertanggungjawab dan tidak bertanggungjawab dalam komuniti sekitar kita. Teruskan amalan mulia ini! (+30 Mata Bonus!)</p>
+                    </div>
+                `;
+                document.getElementById('quizFeedback').classList.add('hidden');
+                document.getElementById('btnNextQuiz').classList.add('hidden');
+
+                setTimeout(() => {
+                    backToMap();
+                }, 4000);
+            } else {
+                loadQuiz();
+            }
+        }
+
+        // ================= PENJANAAN SIJIL & RESTART =================
+        function showCertificate() {
+            playSound('complete');
+            showScreen('screenCertificate');
+        }
+
+        // FUNGSI JANA DAN MUAT TURUN SIJIL BERKUALITI TINGGI (PNG)
+        function downloadCertificate() {
+            playSound('click');
+            
+            // Buat element canvas di sebalik tabir
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200;
+            canvas.height = 800;
+            const ctx = canvas.getContext('2d');
+
+            // 1. Latar Belakang Sijil (Gradient Lembut)
+            const gradient = ctx.createLinearGradient(0, 0, 1200, 800);
+            gradient.addColorStop(0, '#ffffff');
+            gradient.addColorStop(1, '#f8fafc');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1200, 800);
+
+            // 2. Bingkai Berkembar Emas Klasik (Double Gold Border)
+            ctx.strokeStyle = '#eab308'; // Amber-500
+            ctx.lineWidth = 16;
+            ctx.strokeRect(20, 20, 1160, 760);
+            
+            ctx.strokeStyle = '#ca8a04'; // Amber-600
+            ctx.lineWidth = 4;
+            ctx.strokeRect(32, 32, 1136, 736);
+
+            // 3. Elemen Hiasan Sudut
+            ctx.fillStyle = '#ca8a04';
+            ctx.font = '36px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('📜', 70, 90);
+            ctx.fillText('✨', 1130, 90);
+            ctx.fillText('✨', 70, 730);
+            ctx.fillText('📜', 1130, 730);
+
+            // 4. Lukis Ikon Piala (Trophy)
+            ctx.font = '80px Arial';
+            ctx.fillText('🏆', 600, 160);
+
+            // 5. Tajuk Sijil
+            ctx.fillStyle = '#d97706'; // Amber-600
+            ctx.font = 'bold 54px Arial, sans-serif';
+            ctx.fillText('SIJIL PENGHARGAAN', 600, 240);
+
+            // 6. Sub-penerangan
+            ctx.fillStyle = '#64748b'; // Slate-500
+            ctx.font = '22px Arial, sans-serif';
+            ctx.fillText('Dengan ini dianugerahkan kepada:', 600, 300);
+
+            // 7. Nama Murid (Besar, Bold & Emerald Green)
+            ctx.fillStyle = '#059669'; // Emerald-600
+            ctx.font = 'bold 46px Arial, sans-serif';
+            const namaMurid = (state.studentName || 'HERO TANGGUNGJAWAB').toUpperCase();
+            ctx.fillText(namaMurid, 600, 380);
+
+            // Garisan Bawah Nama Murid
+            ctx.strokeStyle = '#a7f3d0'; // Emerald-200
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(350, 400);
+            ctx.lineTo(850, 400);
+            ctx.stroke();
+
+            // 8. Teks Deskripsi Sijil
+            ctx.fillStyle = '#334155'; // Slate-700
+            ctx.font = '20px Arial, sans-serif';
+            const baris1 = "Kerana telah berjaya menunjukkan pemahaman yang tinggi serta menyelesaikan";
+            const baris2 = "semua misi simulasi dengan cemerlang tentang Nilai Tanggungjawab (Moral Tahun 3).";
+            ctx.fillText(baris1, 600, 460);
+            ctx.fillText(baris2, 600, 500);
+
+            // Garisan Pembagi Pembantu
+            ctx.strokeStyle = '#e2e8f0'; // Slate-200
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(450, 550);
+            ctx.lineTo(750, 550);
+            ctx.stroke();
+
+            // 9. Ruangan Maklumat (Gelaran Hero & Tarikh)
+            ctx.fillStyle = '#94a3b8'; // Slate-400
+            ctx.font = 'bold 15px Arial, sans-serif';
+            
+            // Kolum Kiri - Gelaran
+            ctx.textAlign = 'left';
+            ctx.fillText('GELARAN HERO:', 300, 600);
+            ctx.fillStyle = '#b45309'; // Amber-700
+            ctx.font = 'bold 19px Arial, sans-serif';
+            ctx.fillText('Hero Tanggungjawab Cilik 🎖️', 300, 630);
+
+            // Kolum Kanan - Tarikh
+            ctx.textAlign = 'right';
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = 'bold 15px Arial, sans-serif';
+            ctx.fillText('TARIKH PENCAPAIAN:', 900, 600);
+            ctx.fillStyle = '#475569'; // Slate-600
+            ctx.font = 'bold 19px Arial, sans-serif';
+            
+            const hariIni = new Date();
+            const tarikhFormat = `${hariIni.getDate()}/${hariIni.getMonth() + 1}/${hariIni.getFullYear()}`;
+            ctx.fillText(tarikhFormat, 900, 630);
+
+            // 10. Elemen Lencana Hiasan Bawah
+            ctx.textAlign = 'center';
+            ctx.font = '40px Arial';
+            ctx.fillText('🌟  🧑‍✈️  🌟', 600, 710);
+
+            // 11. Proses Muat Turun Fail PNG secara selamat (Blob)
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = `Sijil_Hero_${namaMurid.replace(/\s+/g, '_')}.png`;
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Bebaskan memori URL
+                setTimeout(() => URL.revokeObjectURL(url), 100);
+            }, 'image/png');
+        }
+
+        function restartGame() {
+            playSound('click');
+            state.score = 0;
+            state.completedZones = [];
+            state.studentName = "";
+            document.getElementById('studentName').value = "";
+            
+            document.getElementById('badgeZone1').classList.add('hidden');
+            document.getElementById('btnZone1').innerText = "Masuk Zon Rumah 🧹";
+            document.getElementById('btnZone1').className = "w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-2.5 px-4 rounded-xl shadow-md transition";
+            document.getElementById('cardZone1').classList.remove('opacity-90');
+
+            document.getElementById('badgeZone2').classList.add('hidden');
+            document.getElementById('btnZone2').innerText = "Masuk Zon Sekolah 🏫";
+            document.getElementById('btnZone2').className = "w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-xl shadow-md transition";
+            document.getElementById('cardZone2').classList.remove('opacity-90');
+
+            document.getElementById('badgeZone3').classList.add('hidden');
+            document.getElementById('btnZone3').innerText = "Masuk Zon Komuniti 🌲";
+            document.getElementById('btnZone3').className = "w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-2.5 px-4 rounded-xl shadow-md transition";
+            document.getElementById('cardZone3').classList.remove('opacity-90');
+
+            showScreen('screenWelcome');
+        }
+
+        document.body.addEventListener('click', () => {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }, { once: true });
+    </script>
+</body>
+</html>
